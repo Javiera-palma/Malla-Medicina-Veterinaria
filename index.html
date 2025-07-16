@@ -1,66 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Medicina Veterinaria - UdeC</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Malla Vertical - Medicina Veterinaria</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f8f8f8; padding: 20px; }
-    h1, h2 { color: #333; }
-    .semestre, .electivos, .especialidad { margin-bottom: 30px; }
-    .ramos { display: flex; flex-direction: column; gap: 10px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .scroll-container {
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .malla {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(200px, 1fr);
+      gap: 10px;
+      min-width: 1200px;
+    }
+
+    .semestre {
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 600px;
+    }
+
+    .semestre h2 {
+      text-align: center;
+      font-size: 1em;
+      margin: 0 0 10px;
+    }
+
     .ramo {
       padding: 10px;
-      border-radius: 8px;
+      border-radius: 6px;
       border: 1px solid #ccc;
-      width: 200px;
       text-align: center;
+      font-size: 0.95em;
       cursor: pointer;
-      background-color: #ccc; /* bloqueado por defecto */
+      background-color: #ccc;
       transition: background 0.3s, text-decoration 0.3s;
     }
+
     .disponible { background-color: #f9c2d1; }
     .aprobado {
       background-color: #c2e7f9;
       text-decoration: line-through;
     }
-    .titulo-electivo { margin-top: 40px; }
-    .contenedor-grid {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  gap: 20px;
-  overflow-x: auto;
-  align-items: start;
-  margin-bottom: 40px;
-}
-.semestre {
-  border: 2px solid #000;
-  padding: 10px;
-  min-width: 200px;
-  background-color: #ffffff;
-}
-   .semestre h2 {
-  text-align: center;
-  font-size: 1.1em;
-  margin-bottom: 10px;
-} 
+
+    .electivo-info {
+      font-size: 0.9em;
+      font-style: italic;
+      color: #666;
+      text-align: center;
+      background: #ffffe0;
+      padding: 5px;
+      border: 1px dashed #aaa;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
   <h1>Malla Medicina Veterinaria - UdeC</h1>
 
-  <div id="contenedor-malla" class="contenedor-grid"></div>
-
-  <h2 class="titulo-electivo">Electivos Generales</h2>
-  <div class="electivos ramos" id="electivos-generales"></div>
-
-  <h2 class="titulo-electivo">Electivos de Especialidad</h2>
-  <div class="especialidad ramos" id="electivos-especialidad"></div>
+  <div class="scroll-container">
+    <div id="contenedor-malla" class="malla"></div>
+  </div>
 
   <script>
     const data = JSON.parse(localStorage.getItem("mallaAprobada") || "{}");
 
+    
     const malla = {
   "Primer semestre": [
     { name: "Anatomía Animal 1", prerequisites: [] },
@@ -134,20 +159,31 @@
     { name: "Clínica Grandes Animales", prerequisites: ["Medicina y Cirugía de Grandes Animales"] },
     { name: "Clínica Pequeños Animales", prerequisites: ["Medicina y Cirugía de Pequeños Animales"] },
     { name: "Tecnología de Alimentos", prerequisites: ["Inspección e Higiene de los Alimentos"] },
-    { name: "Electiva Especialidad 1", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
     { name: "Gira de Estudio", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-    { name: "Examen de Grado", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] }
+    { name: "Examen de Grado", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
+    { name: "Electiva Especialidad 1", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
+     {
+          name: "Elegir al menos 1 electivo de especialidad",
+          prerequisites: [],
+          isInfo: true
+        }
   ],
   "Décimo semestre": [
     { name: "Producción De Rumiantes De Leche", prerequisites: ["Obstetricia y Neonatología", "Alimentación Animal"] },
     { name: "Salud Pública", prerequisites: ["Tecnología de Alimentos"] },
     { name: "Formulación Y Evaluación De Proyectos", prerequisites: ["Gestión y Administración"] },
+    { name: "Ética Médico Veterinaria", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
+    { name: "Práctica de Titulación e Inserción Laboral", prerequisites: ["Producción De Rumiantes De Carne", "Medicina Preventiva", "Clínica Grandes Animales", "Clínica Pequeños Animales", "Tecnología de Alimentos", "Electiva Especialidad 1", "Gira de Estudio", "Examen de Grado"] },
     { name: "Electiva Especialidad 2", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
     { name: "Electiva Especialidad 3", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
     { name: "Electiva Especialidad 4", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-    { name: "Ética Médico Veterinaria", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-    { name: "Práctica de Titulación e Inserción Laboral", prerequisites: ["Producción De Rumiantes De Carne", "Medicina Preventiva", "Clínica Grandes Animales", "Clínica Pequeños Animales", "Tecnología de Alimentos", "Electiva Especialidad 1", "Gira de Estudio", "Examen de Grado"] }
-  ],
+  {
+          name: "Elegir 2 o más electivos de especialidad",
+          prerequisites: [],
+          isInfo: true
+        }
+      ],
+  
   "Undécimo semestre": [
     { name: "Trabajo de Titulación", prerequisites: ["Práctica de Titulación e Inserción Laboral"] }
   ]
@@ -193,50 +229,48 @@
   { name: "Avicultura", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] }
 ];
 
-     const contenedor = document.getElementById("contenedor-malla");
+    const contenedor = document.getElementById("contenedor-malla");
 
     Object.entries(malla).forEach(([semestre, ramos]) => {
-      const div = document.createElement("div");
-      div.className = "semestre";
-      const h2 = document.createElement("h2");
-      h2.textContent = semestre;
-      div.appendChild(h2);
+      const divSemestre = document.createElement("div");
+      divSemestre.className = "semestre";
 
-      const ramosDiv = document.createElement("div");
-      ramosDiv.className = "ramos";
-      ramos.forEach(ramo => crearRamo(ramo, ramosDiv));
+      const titulo = document.createElement("h2");
+      titulo.textContent = semestre;
+      divSemestre.appendChild(titulo);
 
-      div.appendChild(ramosDiv);
-      contenedor.appendChild(div);
+      ramos.forEach(ramo => {
+  const div = document.createElement("div");
+
+  if (ramo.isInfo) {
+    div.className = "electivo-info";
+    div.textContent = ramo.name;
+  } else {
+    div.className = "ramo";
+    div.textContent = ramo.name;
+    div.title = ramo.prerequisites.length > 0
+      ? "Prerrequisitos: " + ramo.prerequisites.join(", ")
+      : "Sin prerrequisitos";
+    div.dataset.name = ramo.name;
+    div.dataset.prerequisites = JSON.stringify(ramo.prerequisites);
+
+    div.addEventListener("click", () => {
+      const name = div.dataset.name;
+      if (data[name]) {
+        delete data[name];
+      } else {
+        data[name] = true;
+      }
+      localStorage.setItem("mallaAprobada", JSON.stringify(data));
+      actualizarEstadoRamos();
     });
+  }
 
-    electivos.forEach(r => crearRamo(r, document.getElementById("electivos-generales")));
-    especialidad.forEach(r => crearRamo(r, document.getElementById("electivos-especialidad")));
-
-    function crearRamo(ramo, container) {
-      const div = document.createElement("div");
-      div.className = "ramo";
-      div.textContent = ramo.name;
-      div.dataset.name = ramo.name;
-      div.dataset.prerequisites = JSON.stringify(ramo.prerequisites);
-
-      div.title = ramo.prerequisites.length > 0
-        ? "Prerrequisitos: " + ramo.prerequisites.join(", ")
-        : "Sin prerrequisitos";
-
-      div.addEventListener("click", () => {
-        const name = div.dataset.name;
-        if (data[name]) {
-          delete data[name];
-        } else {
-          data[name] = true;
-        }
-        localStorage.setItem("mallaAprobada", JSON.stringify(data));
-        actualizarEstadoRamos();
-      });
-
-      container.appendChild(div);
-    }
+  divSemestre.appendChild(div);
+});
+      
+      contenedor.appendChild(divSemestre);
+    });
 
     function verificarDesbloqueo(prerequisitos) {
       return prerequisitos.every(pr => data[pr]);
@@ -256,7 +290,7 @@
       });
     }
 
-    actualizarEstadoRamos(); // 🔁 Se ejecuta al cargar la página
+    actualizarEstadoRamos();
   </script>
 </body>
 </html>
