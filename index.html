@@ -417,21 +417,27 @@
       contadorEsp.style.backgroundColor = "#efe0ff";
     }
   }
+document.querySelectorAll(".ramo").forEach(div => {
+  const name = div.dataset.name;
 
-  // --- MARCAR ELECTIVA GENERAL I y II AUTOMÁTICAMENTE ---
-  data["Electiva General I"] = aprobadosGen >= 1;
-  data["Electiva General II"] = aprobadosGen >= 2;
-
-  // --- MARCAR ELECTIVA ESPECIALIDAD I - IV AUTOMÁTICAMENTE ---
-  const especElectivas = [
-    "Electiva Especialidad I",
-    "Electiva Especialidad II",
-    "Electiva Especialidad III",
-    "Electiva Especialidad IV"
-  ];
-  for (let i = 0; i < especElectivas.length; i++) {
-    data[especElectivas[i]] = i < aprobadosEsp;
+  if (name === "Electiva General I" && aprobadosGen >= 1) {
+    div.classList.add("aprobado");
   }
+  if (name === "Electiva General II" && aprobadosGen >= 2) {
+    div.classList.add("aprobado");
+  }
+
+  // Para las de especialidad
+  if (
+    name === "Electiva Especialidad 1" && aprobadosEsp >= 1 ||
+    name === "Electiva Especialidad 2" && aprobadosEsp >= 2 ||
+    name === "Electiva Especialidad 3" && aprobadosEsp >= 3 ||
+    name === "Electiva Especialidad 4" && aprobadosEsp >= 4
+  ) {
+    div.classList.add("aprobado");
+  }
+});
+
 
   // Re-render para actualizar colores
   document.querySelectorAll(".ramo").forEach(div => {
