@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Malla Vertical - Medicina Veterinaria</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      padding: 20px;
-    }
-
+   body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    padding: 20px;
+    color: #333;
+   }
     h1 {
       text-align: center;
       margin-bottom: 30px;
@@ -57,12 +57,20 @@
       transition: background 0.3s, text-decoration 0.3s;
     }
 
-    .disponible { background-color: #f9c2d1; }
+    .disponible {
+      background-color: #fcebbd;
+      font-weight: bold;
+      border: 2px solid #f9c74f;
+     }
+    
     .aprobado {
-      background-color: #c2e7f9;
+      background-color: #9ce99c;
       text-decoration: line-through;
-    }
-
+      font-weight: bold;
+      border: 2px solid #57cc57;
+      cursor: pointer;
+     }
+      
     .electivo-info {
       font-size: 0.9em;
       font-style: italic;
@@ -76,21 +84,24 @@
 
     /* Electivos en fila */
     .fila-electivos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
+      margin-top: 40px;
+      padding: 10px;
       background: #fff;
       border: 2px solid #ddd;
       border-radius: 8px;
-      padding: 10px;
-    }
+     }
 
     .fila-electivos h2 {
-      flex-basis: 100%;
       text-align: center;
       margin-bottom: 10px;
-    }
+     }
+   
+    .fila-electivos .fila {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+     }
   </style>
 </head>
 <body>
@@ -98,7 +109,9 @@
 
   <div class="scroll-container">
     <div id="contenedor-malla" class="malla"></div>
-  </div>
+  </div>   
+   
+  <div id="contenedor-electivos"></div>
 
   <script>
     const data = JSON.parse(localStorage.getItem("mallaAprobada") || "{}");
@@ -281,7 +294,7 @@
       contenedor.appendChild(divSemestre);
     });
 
-    // Agrega fila horizontal para electivos
+    
     function agregarFilaElectivos(tituloTexto, ramos) {
       const fila = document.createElement("div");
       fila.className = "fila-electivos";
@@ -290,6 +303,9 @@
       titulo.textContent = tituloTexto;
       fila.appendChild(titulo);
 
+      const contenedorRamos = document.createElement("div");
+      contenedorRamos.className = "fila";
+      
       ramos.forEach(ramo => {
         const div = document.createElement("div");
         div.className = "ramo";
@@ -310,16 +326,22 @@
           localStorage.setItem("mallaAprobada", JSON.stringify(data));
           actualizarEstadoRamos();
         });
+        contenedorRamos.appendChild(div);
+    });
 
-        fila.appendChild(div);
-      });
+       fila.appendChild(contenedorRamos);
 
-      contenedor.appendChild(fila);
-    }
+       document.getElementById("contenedor-electivos").appendChild(fila);
+      
+      }
+  
+    electivos.sort((a, b) => a.name.localeCompare(b.name));
+    especialidad.sort((a, b) => a.name.localeCompare(b.name));
 
     agregarFilaElectivos("Electivos Generales", electivos);
     agregarFilaElectivos("Electivos de Especialidad", especialidad);
 
+  
     // Lógica para actualizar estado visual
     function verificarDesbloqueo(prerequisitos) {
       return prerequisitos.every(pr => data[pr]);
