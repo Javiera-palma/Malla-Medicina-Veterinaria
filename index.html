@@ -73,6 +73,24 @@
       border: 1px dashed #aaa;
       border-radius: 4px;
     }
+
+    /* Electivos en fila */
+    .fila-electivos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .fila-electivos h2 {
+      flex-basis: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -84,7 +102,6 @@
 
   <script>
     const data = JSON.parse(localStorage.getItem("mallaAprobada") || "{}");
-
     
     const malla = {
   "Primer semestre": [
@@ -231,7 +248,7 @@
 
     const contenedor = document.getElementById("contenedor-malla");
 
-    Object.entries(malla).forEach(([semestre, ramos]) => {
+     Object.entries(malla).forEach(([semestre, ramos]) => {
       const divSemestre = document.createElement("div");
       divSemestre.className = "semestre";
 
@@ -240,38 +257,78 @@
       divSemestre.appendChild(titulo);
 
       ramos.forEach(ramo => {
-  const div = document.createElement("div");
+        const div = document.createElement("div");
 
-  if (ramo.isInfo) {
-    div.className = "electivo-info";
-    div.textContent = ramo.name;
-  } else {
-    div.className = "ramo";
-    div.textContent = ramo.name;
-    div.title = ramo.prerequisites.length > 0
-      ? "Prerrequisitos: " + ramo.prerequisites.join(", ")
-      : "Sin prerrequisitos";
-    div.dataset.name = ramo.name;
-    div.dataset.prerequisites = JSON.stringify(ramo.prerequisites);
+        if (ramo.isInfo) {
+          div.className = "electivo-info";
+          div.textContent = ramo.name;
+        } else {
+          div.className = "ramo";
+          div.textContent = ramo.name;
+          div.title = ramo.prerequisites.length > 0
+            ? "Prerrequisitos: " + ramo.prerequisites.join(", ")
+            : "Sin prerrequisitos";
+          div.dataset.name = ramo.name;
+          div.dataset.prerequisites = JSON.stringify(ramo.prerequisites);
 
-    div.addEventListener("click", () => {
-      const name = div.dataset.name;
-      if (data[name]) {
-        delete data[name];
-      } else {
-        data[name] = true;
-      }
-      localStorage.setItem("mallaAprobada", JSON.stringify(data));
-      actualizarEstadoRamos();
-    });
-  }
+          div.addEventListener("click", () => {
+            const name = div.dataset.name;
+            if (data[name]) {
+              delete data[name];
+            } else {
+              data[name] = true;
+            }
+            localStorage.setItem("mallaAprobada", JSON.stringify(data));
+            actualizarEstadoRamos();
+          });
+        }
 
-  divSemestre.appendChild(div);
-});
-      
+        divSemestre.appendChild(div);
+      });
+
       contenedor.appendChild(divSemestre);
     });
 
+    // Agrega fila horizontal para electivos
+    function agregarFilaElectivos(tituloTexto, ramos) {
+      const fila = document.createElement("div");
+      fila.className = "fila-electivos";
+
+      const titulo = document.createElement("h2");
+      titulo.textContent = tituloTexto;
+      fila.appendChild(titulo);
+
+      ramos.forEach(ramo => {
+        const div = document.createElement("div");
+        div.className = "ramo";
+        div.textContent = ramo.name;
+        div.title = ramo.prerequisites.length > 0
+          ? "Prerrequisitos: " + ramo.prerequisites.join(", ")
+          : "Sin prerrequisitos";
+        div.dataset.name = ramo.name;
+        div.dataset.prerequisites = JSON.stringify(ramo.prerequisites);
+
+        div.addEventListener("click", () => {
+          const name = div.dataset.name;
+          if (data[name]) {
+            delete data[name];
+          } else {
+            data[name] = true;
+          }
+          localStorage.setItem("mallaAprobada", JSON.stringify(data));
+          actualizarEstadoRamos();
+        });
+
+        fila.appendChild(div);
+      });
+
+      contenedor.appendChild(fila);
+    }
+
+    agregarFilaElectivos("Electivos Generales", electivos);
+    agregarFilaElectivos("Electivos de Especialidad", especialidad);
+
+    // Lógica para actualizar estado visual
     function verificarDesbloqueo(prerequisitos) {
       return prerequisitos.every(pr => data[pr]);
     }
@@ -294,4 +351,6 @@
   </script>
 </body>
 </html>
+
+
     
