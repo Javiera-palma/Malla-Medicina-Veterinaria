@@ -8,7 +8,7 @@
     body { font-family: Arial, sans-serif; background: #f8f8f8; padding: 20px; }
     h1, h2 { color: #333; }
     .semestre, .electivos, .especialidad { margin-bottom: 30px; }
-    .ramos { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ramos { display: flex; flex-direction: column; gap: 10px; }
     .ramo {
       padding: 10px;
       border-radius: 8px;
@@ -117,7 +117,7 @@
     { name: "Anestesiología y Cirugía", prerequisites: ["Farmacología", "Imagenología"] },
     { name: "Semiología Animal", prerequisites: ["Enfermedades Infecciosas", "Imagenología"] },
     { name: "Gestión y Administración", prerequisites: ["Economía"] },
-    { name: "Práctica Curricular 1", prerequisites: ["Reproducción Animal", "Nutrición Animal", "Producción y Sanidad Acuícola", "Farmacología", "Imagenología", "Epidemiolgía"] }
+    { name: "Práctica Curricular 1", prerequisites: ["Reproducción Animal", "Nutrición Animal", "Producción y Sanidad Acuícola", "Farmacología", "Imagenología", "Epidemiología"] }
   ],
   "Octavo semestre": [
     { name: "Obstetricia y Neonatología", prerequisites: ["Ginecología y Andrología"] },
@@ -161,11 +161,11 @@
   { name: "Manejo Integrado de Plagas", prerequisites: ["Ginecología y Andrología", "Alimentación Animal", "Producción Avícola", "Anestesiología y Cirugía", "Semiología Animal", "Gestión y Administración", "Práctica Curricular 1"] },
   { name: "Ecología de Parásitos", prerequisites: ["Enfermedades Parasitarias"] },
   { name: "Análisis Estadístico", prerequisites: ["Bioestadística"] },
-  { name: "Ornitología", prerequisites: ["Fsiolgía Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
-  { name: "Patología Aviar", prerequisites: ["Patología Animal II"] },
+  { name: "Ornitología", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
+  { name: "Patología Aviar", prerequisites: ["Patología Animal 2"] },
   { name: "Vida Silvestre 1", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
   { name: "Vida Silvestre 2", prerequisites: ["Vida Silvestre 1"] },
-  { name: "Diagnóstico Anatomopatológico en Aves", prerequisites: ["Patología Animal II"] },
+  { name: "Diagnóstico Anatomopatológico en Aves", prerequisites: ["Patología Animal 2"] },
   { name: "Técnicas Embriológicas para Reproducción Asistida", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
   { name: "Producción Equina", prerequisites: ["Semiología Animal"] },
   { name: "Producción Ovina y Caprina", prerequisites: ["Alimentación Animal"] },
@@ -187,13 +187,13 @@
   { name: "Cirugía en Pequeños Animales", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
   { name: "Terapeuta Veterinaria", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
   { name: "Radiología en Pequeños Animales", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Patología Clínica 2", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2o"] },
+  { name: "Patología Clínica 2", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
   { name: "Tecnología y Calidad de Leche", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
   { name: "Asistencia Predial 2", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
   { name: "Avicultura", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] }
 ];
 
-    const contenedor = document.getElementById("contenedor-malla");
+     const contenedor = document.getElementById("contenedor-malla");
 
     Object.entries(malla).forEach(([semestre, ramos]) => {
       const div = document.createElement("div");
@@ -209,60 +209,55 @@
       div.appendChild(ramosDiv);
       contenedor.appendChild(div);
     });
-    
+
     electivos.forEach(r => crearRamo(r, document.getElementById("electivos-generales")));
     especialidad.forEach(r => crearRamo(r, document.getElementById("electivos-especialidad")));
 
-function crearRamo(ramo, container) {
-  const div = document.createElement("div");
-  div.className = "ramo";
-  div.textContent = ramo.name;
-  div.dataset.name = ramo.name;
-  div.dataset.prerequisites = JSON.stringify(ramo.prerequisites);
+    function crearRamo(ramo, container) {
+      const div = document.createElement("div");
+      div.className = "ramo";
+      div.textContent = ramo.name;
+      div.dataset.name = ramo.name;
+      div.dataset.prerequisites = JSON.stringify(ramo.prerequisites);
 
-  // Mostrar prerrequisitos al pasar el mouse
-  if (ramo.prerequisites && ramo.prerequisites.length > 0) {
-    div.title = "Prerrequisitos: " + ramo.prerequisites.join(", ");
-  } else {
-    div.title = "Sin prerrequisitos";
-  }
+      div.title = ramo.prerequisites.length > 0
+        ? "Prerrequisitos: " + ramo.prerequisites.join(", ")
+        : "Sin prerrequisitos";
 
-  if (data[ramo.name]) {
-    div.classList.add("aprobado");
-  } else {
-    const desbloqueado = verificarDesbloqueo(ramo.prerequisites);
-    if (desbloqueado) div.classList.add("disponible");
-  }
+      div.addEventListener("click", () => {
+        const name = div.dataset.name;
+        if (data[name]) {
+          delete data[name];
+        } else {
+          data[name] = true;
+        }
+        localStorage.setItem("mallaAprobada", JSON.stringify(data));
+        actualizarEstadoRamos();
+      });
 
-  div.addEventListener("click", () => {
-    if (div.classList.contains("aprobado")) {
-      div.classList.remove("aprobado");
-      div.classList.add("disponible");
-      delete data[ramo.name];
-    } else if (div.classList.contains("disponible")) {
-      div.classList.remove("disponible");
-      div.classList.add("aprobado");
-      data[ramo.name] = true;
+      container.appendChild(div);
     }
-    localStorage.setItem("mallaAprobada", JSON.stringify(data));
-    location.reload();
-  });
-
-  container.appendChild(div);
-}
 
     function verificarDesbloqueo(prerequisitos) {
-      return prerequisitos.every(pr => {
-        if (pr.includes("semestre")) {
-          const num = parseInt(pr.match(/\d+/g));
-          return Object.entries(malla).every(([sem, rams]) => {
-            const n = parseInt(sem.match(/\d+/g));
-            return n <= num ? rams.every(r => data[r.name]) : true;
-          });
+      return prerequisitos.every(pr => data[pr]);
+    }
+
+    function actualizarEstadoRamos() {
+      document.querySelectorAll(".ramo").forEach(div => {
+        const name = div.dataset.name;
+        const prereqs = JSON.parse(div.dataset.prerequisites);
+        div.classList.remove("aprobado", "disponible");
+
+        if (data[name]) {
+          div.classList.add("aprobado");
+        } else if (verificarDesbloqueo(prereqs)) {
+          div.classList.add("disponible");
         }
-        return data[pr];
       });
     }
+
+    actualizarEstadoRamos(); // 🔁 Se ejecuta al cargar la página
   </script>
 </body>
 </html>
+    
