@@ -118,7 +118,7 @@
     
     const malla = {
   "Primer semestre": [
-    { name: "Anatomía Animal 1", prerequisites: [] },
+    { name: "Anatomía Animal I", prerequisites: [] },
     { name: "Biología Celular", prerequisites: [] },
     { name: "Química General", prerequisites: [] },
     { name: "Zoología", prerequisites: [] },
@@ -126,8 +126,8 @@
     { name: "Taller Formativo", prerequisites: [] }
   ],
   "Segundo semestre": [
-    { name: "Anatomía Animal 2", prerequisites: ["Anatomía Animal 1"] },
-    { name: "Fisiología Animal 1", prerequisites: ["Biología Celular"] },
+    { name: "Anatomía Animal II", prerequisites: ["Anatomía Animal I"] },
+    { name: "Fisiología Animal I", prerequisites: ["Biología Celular"] },
     { name: "Genética", prerequisites: ["Biología Celular"] },
     { name: "Histología Animal", prerequisites: ["Biología Celular"] },
     { name: "Bioquímica", prerequisites: ["Química General"] },
@@ -135,32 +135,32 @@
     { name: "Orientación Vocacional", prerequisites: ["Taller Formativo"] }
   ],
   "Tercer semestre": [
-    { name: "Embriología Animal", prerequisites: ["Anatomía Animal 2"] },
-    { name: "Fisiología Animal 2", prerequisites: ["Fisiología Animal 1", "Anatomía Animal 2", "Genética"] },
+    { name: "Embriología Animal", prerequisites: ["Anatomía Animal II"] },
+    { name: "Fisiología Animal II", prerequisites: ["Fisiología Animal I", "Anatomía Animal II", "Genética"] },
     { name: "Inmunología", prerequisites: ["Histología Animal", "Bioquímica"] },
     { name: "Ecología", prerequisites: ["Zoología"] },
     { name: "Bioestadística", prerequisites: ["Física General"] },
-    { name: "Inglés 1", prerequisites: ["Orientación Vocacional"] }
+    { name: "Inglés I", prerequisites: ["Orientación Vocacional"] }
   ],
   "Cuarto semestre": [
-    { name: "Patología Animal 1", prerequisites: ["Fisiología Animal 2"] },
-    { name: "Etología y Bienestar Animal", prerequisites: ["Fisiología Animal 2"] },
+    { name: "Patología Animal I", prerequisites: ["Fisiología Animal II"] },
+    { name: "Etología y Bienestar Animal", prerequisites: ["Fisiología Animal II"] },
     { name: "Virología", prerequisites: ["Inmunología"] },
     { name: "Bacteriología y Micología", prerequisites: ["Inmunología"] },
     { name: "Biodiversidad y Conservación De Especies", prerequisites: ["Ecología"] },
-    { name: "Inglés 2", prerequisites: ["Inglés 1"] }
+    { name: "Inglés II", prerequisites: ["Inglés I"] }
   ],
   "Quinto semestre": [
-    { name: "Patología Animal 2", prerequisites: ["Patología Animal 1"] },
-    { name: "Fisiopatología Animal", prerequisites: ["Patología Animal 1"] },
-    { name: "Enfermedades Infecciosas", prerequisites: ["Inglés 2", "Bacteriología y Micología", "Virología"] },
+    { name: "Patología Animal II", prerequisites: ["Patología Animal I"] },
+    { name: "Fisiopatología Animal", prerequisites: ["Patología Animal I"] },
+    { name: "Enfermedades Infecciosas", prerequisites: ["Inglés II", "Bacteriología y Micología", "Virología"] },
     { name: "Enfermedades Parasitarias", prerequisites: ["Ecología", "Inmunología"] },
     { name: "Economía", prerequisites: ["Bioestadística"] }
   ],
   "Sexto semestre": [
     { name: "Reproducción Animal", prerequisites: ["Embriología Animal", "Fisiopatología Animal"] },
-    { name: "Nutrición Animal", prerequisites: ["Fisiología Animal 2"] },
-    { name: "Producción y Sanidad Acuícola", prerequisites: ["Patología Animal 2"] },
+    { name: "Nutrición Animal", prerequisites: ["Fisiología Animal II"] },
+    { name: "Producción y Sanidad Acuícola", prerequisites: ["Patología Animal II"] },
     { name: "Farmacología", prerequisites: ["Fisiopatología Animal"] },
     { name: "Imagenología", prerequisites: ["Fisiopatología Animal"] },
     { name: "Epidemiología", prerequisites: ["Enfermedades Infecciosas", "Enfermedades Parasitarias", "Bioestadística"] }
@@ -172,7 +172,7 @@
     { name: "Anestesiología y Cirugía", prerequisites: ["Farmacología", "Imagenología"] },
     { name: "Semiología Animal", prerequisites: ["Enfermedades Infecciosas", "Imagenología"] },
     { name: "Gestión y Administración", prerequisites: ["Economía"] },
-    { name: "Práctica Curricular 1", prerequisites: ["Reproducción Animal", "Nutrición Animal", "Producción y Sanidad Acuícola", "Farmacología", "Imagenología", "Epidemiología"] }
+    { name: "Práctica Curricular I", prerequisites: ["Reproducción Animal", "Nutrición Animal", "Producción y Sanidad Acuícola", "Farmacología", "Imagenología", "Epidemiología"] }
   ],
   "Octavo semestre": [
     { name: "Obstetricia y Neonatología", prerequisites: ["Ginecología y Andrología"] },
@@ -181,7 +181,7 @@
     { name: "Medicina y Cirugía de Grandes Animales", prerequisites: ["Semiología Animal", "Anestesiología y Cirugía"] },
     { name: "Medicina y Cirugía de Pequeños Animales", prerequisites: ["Semiología Animal", "Anestesiología y Cirugía"] },
     { name: "Inspección e Higiene de los Alimentos", prerequisites: ["Epidemiología"] },
-    { name: "Práctica Curricular 2", prerequisites: ["Ginecología y Andrología", "Alimentación Animal", "Producción Avícola", "Anestesiología y Cirugía", "Semiología Animal", "Gestión y Administración", "Práctica Curricular 1"] }
+    { name: "Práctica Curricular II", prerequisites: ["Ginecología y Andrología", "Alimentación Animal", "Producción Avícola", "Anestesiología y Cirugía", "Semiología Animal", "Gestión y Administración", "Práctica Curricular I"] }
   ],
   "Noveno semestre": [
     { name: "Producción De Rumiantes De Carne", prerequisites: ["Obstetricia y Neonatología", "Alimentación Animal"] },
@@ -189,20 +189,20 @@
     { name: "Clínica Grandes Animales", prerequisites: ["Medicina y Cirugía de Grandes Animales"] },
     { name: "Clínica Pequeños Animales", prerequisites: ["Medicina y Cirugía de Pequeños Animales"] },
     { name: "Tecnología de Alimentos", prerequisites: ["Inspección e Higiene de los Alimentos"] },
-    { name: "Gira de Estudio", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-    { name: "Examen de Grado", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-    { name: "Electiva Especialidad 1", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
+    { name: "Gira de Estudio", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+    { name: "Examen de Grado", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+    { name: "Electiva Especialidad I", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
     
   ],
   "Décimo semestre": [
     { name: "Producción De Rumiantes De Leche", prerequisites: ["Obstetricia y Neonatología", "Alimentación Animal"] },
     { name: "Salud Pública", prerequisites: ["Tecnología de Alimentos"] },
     { name: "Formulación Y Evaluación De Proyectos", prerequisites: ["Gestión y Administración"] },
-    { name: "Ética Médico Veterinaria", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
+    { name: "Ética Médico Veterinaria", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
     { name: "Práctica de Titulación e Inserción Laboral", prerequisites: ["Producción De Rumiantes De Carne", "Medicina Preventiva", "Clínica Grandes Animales", "Clínica Pequeños Animales", "Tecnología de Alimentos", "Electiva Especialidad 1", "Gira de Estudio", "Examen de Grado"] },
-    { name: "Electiva Especialidad 2", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-    { name: "Electiva Especialidad 3", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-    { name: "Electiva Especialidad 4", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
+    { name: "Electiva Especialidad II", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+    { name: "Electiva Especialidad III", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+    { name: "Electiva Especialidad IV", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
 
       ],
   
@@ -211,44 +211,44 @@
   ]
 };
     const electivos = [
-  { name: "Anatomía Aplicada de Animales Menores", prerequisites: ["Patología Animal 2", "Fisiopatología Animal", "Enfermedades Infecciosas", "Enfermedades Parasitarias", "Economía"] },
-  { name: "Anatomía Aplicada de Animales Mayores", prerequisites: ["Patología Animal 2", "Fisiopatología Animal", "Enfermedades Infecciosas", "Enfermedades Parasitarias", "Economía"] },
+  { name: "Anatomía Aplicada de Animales Menores", prerequisites: ["Patología Animal II", "Fisiopatología Animal", "Enfermedades Infecciosas", "Enfermedades Parasitarias", "Economía"] },
+  { name: "Anatomía Aplicada de Animales Mayores", prerequisites: ["Patología Animal II", "Fisiopatología Animal", "Enfermedades Infecciosas", "Enfermedades Parasitarias", "Economía"] },
   { name: "Tópicas de Inmunología y Virología", prerequisites: ["Virología"] },
-  { name: "Toxicología General", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
-  { name: "Análisis y Discusión de Publicaciones Científicas", prerequisites: ["Patología Animal 2", "Fisiopatología Animal", "Enfermedades Infecciosas", "Enfermedades Parasitarias", "Economía"] },
-  { name: "Manejo Integrado de Plagas", prerequisites: ["Ginecología y Andrología", "Alimentación Animal", "Producción Avícola", "Anestesiología y Cirugía", "Semiología Animal", "Gestión y Administración", "Práctica Curricular 1"] },
+  { name: "Toxicología General", prerequisites: ["Fisiología Animal I", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal II"] },
+  { name: "Análisis y Discusión de Publicaciones Científicas", prerequisites: ["Patología Animal II", "Fisiopatología Animal", "Enfermedades Infecciosas", "Enfermedades Parasitarias", "Economía"] },
+  { name: "Manejo Integrado de Plagas", prerequisites: ["Ginecología y Andrología", "Alimentación Animal", "Producción Avícola", "Anestesiología y Cirugía", "Semiología Animal", "Gestión y Administración", "Práctica Curricular I"] },
   { name: "Ecología de Parásitos", prerequisites: ["Enfermedades Parasitarias"] },
   { name: "Análisis Estadístico", prerequisites: ["Bioestadística"] },
-  { name: "Ornitología", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
-  { name: "Patología Aviar", prerequisites: ["Patología Animal 2"] },
-  { name: "Vida Silvestre 1", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
-  { name: "Vida Silvestre 2", prerequisites: ["Vida Silvestre 1"] },
-  { name: "Diagnóstico Anatomopatológico en Aves", prerequisites: ["Patología Animal 2"] },
-  { name: "Técnicas Embriológicas para Reproducción Asistida", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
+  { name: "Ornitología", prerequisites: ["Fisiología Animal I", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal II"] },
+  { name: "Patología Aviar", prerequisites: ["Patología Animal II"] },
+  { name: "Vida Silvestre I", prerequisites: ["Fisiología Animal I", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal II"] },
+  { name: "Vida Silvestre II", prerequisites: ["Vida Silvestre I"] },
+  { name: "Diagnóstico Anatomopatológico en Aves", prerequisites: ["Patología Animal II"] },
+  { name: "Técnicas Embriológicas para Reproducción Asistida", prerequisites: ["Fisiología Animal I", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal II"] },
   { name: "Producción Equina", prerequisites: ["Semiología Animal"] },
   { name: "Producción Ovina y Caprina", prerequisites: ["Alimentación Animal"] },
-  { name: "Utilización de Forrajes", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] },
-  { name: "Apicultura", prerequisites: ["Fisiología Animal 1", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal 2"] }
+  { name: "Utilización de Forrajes", prerequisites: ["Fisiología Animal I", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal II"] },
+  { name: "Apicultura", prerequisites: ["Fisiología Animal I", "Genética", "Histología Animal", "Bioquímica", "Orientación Vocacional", "Zoología", "Física General", "Anatomía Animal II"] }
 ];
     const especialidad = [
-  { name: "Biotecnología Animal", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Enfermedades Zoonóticas", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Mejoramiento Genético Animal", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Transferencia Tecnológica", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Asistencia Predial 1", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Diagnóstico Anatomopatológico aplicado", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Clínica de Equino", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Clínica del Rumiante", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Clínica de Animales Exóticos", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Técnicas de Reproducción Asistida", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Especialidades Médicas en Pequeños Animales", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Cirugía en Pequeños Animales", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Terapeuta Veterinaria", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Radiología en Pequeños Animales", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Patología Clínica 2", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Tecnología y Calidad de Leche", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Asistencia Predial 2", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] },
-  { name: "Avicultura", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular 2"] }
+  { name: "Biotecnología Animal", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Enfermedades Zoonóticas", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Mejoramiento Genético Animal", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Transferencia Tecnológica", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Asistencia Predial I", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Diagnóstico Anatomopatológico aplicado", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Clínica de Equino", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Clínica del Rumiante", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Clínica de Animales Exóticos", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Técnicas de Reproducción Asistida", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Especialidades Médicas en Pequeños Animales", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Cirugía en Pequeños Animales", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Terapeuta Veterinaria", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Radiología en Pequeños Animales", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Patología Clínica II", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Tecnología y Calidad de Leche", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Asistencia Predial II", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] },
+  { name: "Avicultura", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] }
 ];
 
     const contenedor = document.getElementById("contenedor-malla");
