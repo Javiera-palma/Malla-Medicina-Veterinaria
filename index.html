@@ -82,7 +82,6 @@
       border-radius: 4px;
     }
 
-    /* Electivos en fila */
     .fila-electivos {
       margin-top: 40px;
       padding: 10px;
@@ -102,17 +101,38 @@
       justify-content: center;
       gap: 10px;
      }
+    #contador-electivos-generales, #contador-electivos-especialidad {
+      text-align: center;
+      font-weight: bold;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    #contador-electivos-generales {
+      background-color: #d6f3ff;
+      color: #004d66;
+    }
+    #contador-electivos-especialidad {
+      background-color: #efe0ff;
+      color: #4a0072;
+    }   
   </style>
 </head>
 <body>
-  <h1>Malla Medicina Veterinaria - UdeC</h1>
+   <h1>Malla Medicina Veterinaria - UdeC</h1>
 
   <div class="scroll-container">
     <div id="contenedor-malla" class="malla"></div>
   </div>   
-   
+  
+  <div id="contador-electivos-generales" style="background-color: #d6f3ff; color: #004d66; padding: 10px; margin: 10px 0; border-radius: 8px; text-align: center; font-weight: bold;">
+    Electivos Generales pendientes (0 de 2)
+  </div>
+  <div id="contador-electivos-especialidad" style="background-color: #efe0ff; color: #4a0072; padding: 10px; margin: 10px 0; border-radius: 8px; text-align: center; font-weight: bold;">
+    Electivos de Especialidad pendientes (0 de 4)
+  </div> 
   <div id="contenedor-electivos"></div>
-
+  
   <script>
     const data = JSON.parse(localStorage.getItem("mallaAprobada") || "{}");
     
@@ -140,7 +160,8 @@
     { name: "Inmunología", prerequisites: ["Histología Animal", "Bioquímica"] },
     { name: "Ecología", prerequisites: ["Zoología"] },
     { name: "Bioestadística", prerequisites: ["Física General"] },
-    { name: "Inglés I", prerequisites: ["Orientación Vocacional"] }
+    { name: "Inglés I", prerequisites: ["Orientación Vocacional"] },
+    { name: "Electiva General I", prerequisites: [] }
   ],
   "Cuarto semestre": [
     { name: "Patología Animal I", prerequisites: ["Fisiología Animal II"] },
@@ -148,7 +169,8 @@
     { name: "Virología", prerequisites: ["Inmunología"] },
     { name: "Bacteriología y Micología", prerequisites: ["Inmunología"] },
     { name: "Biodiversidad y Conservación De Especies", prerequisites: ["Ecología"] },
-    { name: "Inglés II", prerequisites: ["Inglés I"] }
+    { name: "Inglés II", prerequisites: ["Inglés I"] },
+    { name: "Electiva General II", prerequisites: [] }
   ],
   "Quinto semestre": [
     { name: "Patología Animal II", prerequisites: ["Patología Animal I"] },
@@ -251,6 +273,12 @@
   { name: "Avicultura", prerequisites: ["Obstetricia y Neonatología", "Producción Porcina", "Patología Clínica", "Medicina y Cirugía de Grandes Animales", "Medicina y Cirugía de Pequeños Animales", "Inspección e Higiene de los Alimentos", "Práctica Curricular II"] }
 ];
 
+    electivos.sort((a, b) => a.name.localeCompare(b.name));
+    especialidad.sort((a, b) => a.name.localeCompare(b.name));
+
+    agregarFilaElectivos("Electivos Generales", electivos);
+    agregarFilaElectivos("Electivos de Especialidad", especialidad);
+    
     const contenedor = document.getElementById("contenedor-malla");
 
      Object.entries(malla).forEach(([semestre, ramos]) => {
@@ -338,8 +366,6 @@
     electivos.sort((a, b) => a.name.localeCompare(b.name));
     especialidad.sort((a, b) => a.name.localeCompare(b.name));
 
-    agregarFilaElectivos("Electivos Generales", electivos);
-    agregarFilaElectivos("Electivos de Especialidad", especialidad);
 
   
     // Lógica para actualizar estado visual
@@ -348,19 +374,74 @@
     }
 
     function actualizarEstadoRamos() {
-      document.querySelectorAll(".ramo").forEach(div => {
-        const name = div.dataset.name;
-        const prereqs = JSON.parse(div.dataset.prerequisites);
-        div.classList.remove("aprobado", "disponible");
+  document.querySelectorAll(".ramo").forEach(div => {
+    const name = div.dataset.name;
+    const prereqs = JSON.parse(div.dataset.prerequisites || "[]");
+    div.classList.remove("aprobado", "disponible");
 
-        if (data[name]) {
-          div.classList.add("aprobado");
-        } else if (verificarDesbloqueo(prereqs)) {
-          div.classList.add("disponible");
-        }
-      });
+    if (data[name]) {
+      div.classList.add("aprobado");
+    } else if (verificarDesbloqueo(prereqs)) {
+      div.classList.add("disponible");
     }
+  });
 
+  // --- CONTADORES ELECTIVOS ---
+  const maxGen = 2;
+  const maxEsp = 4;
+
+  const aprobadosGen = electivos.filter(e => data[e.name]).length;
+  const aprobadosEsp = especialidad.filter(e => data[e.name]).length;
+
+  const contadorGen = document.getElementById("contador-electivos-generales");
+  const contadorEsp = document.getElementById("contador-electivos-especialidad");
+
+  // Electivos generales
+  if (contadorGen) {
+    if (aprobadosGen >= maxGen) {
+      contadorGen.textContent = `✅ Has llegado a la cantidad requerida de electivos generales (${aprobadosGen} de ${maxGen})`;
+      contadorGen.style.backgroundColor = "#c6ecff";
+    } else {
+      contadorGen.textContent = `⚠️ Electivos Generales pendientes (${aprobadosGen} de ${maxGen})`;
+      contadorGen.style.backgroundColor = "#d6f3ff";
+    }
+  }
+
+  // Electivos especialidad
+  if (contadorEsp) {
+    if (aprobadosEsp >= maxEsp) {
+      contadorEsp.textContent = `✅ Has llegado a la cantidad requerida de electivos de especialidad (${aprobadosEsp} de ${maxEsp})`;
+      contadorEsp.style.backgroundColor = "#e2ccff";
+    } else {
+      contadorEsp.textContent = `⚠️ Electivos de Especialidad pendientes (${aprobadosEsp} de ${maxEsp})`;
+      contadorEsp.style.backgroundColor = "#efe0ff";
+    }
+  }
+
+  // --- MARCAR ELECTIVA GENERAL I y II AUTOMÁTICAMENTE ---
+  data["Electiva General I"] = aprobadosGen >= 1;
+  data["Electiva General II"] = aprobadosGen >= 2;
+
+  // --- MARCAR ELECTIVA ESPECIALIDAD I - IV AUTOMÁTICAMENTE ---
+  const especElectivas = [
+    "Electiva Especialidad I",
+    "Electiva Especialidad II",
+    "Electiva Especialidad III",
+    "Electiva Especialidad IV"
+  ];
+  for (let i = 0; i < especElectivas.length; i++) {
+    data[especElectivas[i]] = i < aprobadosEsp;
+  }
+
+  // Re-render para actualizar colores
+  document.querySelectorAll(".ramo").forEach(div => {
+    const name = div.dataset.name;
+    div.classList.toggle("aprobado", data[name]);
+    if (!data[name] && verificarDesbloqueo(JSON.parse(div.dataset.prerequisites || "[]"))) {
+      div.classList.add("disponible");
+    }
+  });
+}
     actualizarEstadoRamos();
   </script>
 </body>
