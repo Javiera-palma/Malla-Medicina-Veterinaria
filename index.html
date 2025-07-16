@@ -420,23 +420,39 @@
 document.querySelectorAll(".ramo").forEach(div => {
   const name = div.dataset.name;
 
-  if (name === "Electiva General I" && aprobadosGen >= 1) {
-    div.classList.add("aprobado");
+  // Electiva General I y II: se aprueban o desaprueban automáticamente
+  if (name === "Electiva General I") {
+    if (aprobadosGen >= 1) {
+      data[name] = true;
+    } else {
+      delete data[name];
+    }
   }
-  if (name === "Electiva General II" && aprobadosGen >= 2) {
-    div.classList.add("aprobado");
+  if (name === "Electiva General II") {
+    if (aprobadosGen >= 2) {
+      data[name] = true;
+    } else {
+      delete data[name];
+    }
   }
 
-  // Para las de especialidad
-  if (
-    name === "Electiva Especialidad 1" && aprobadosEsp >= 1 ||
-    name === "Electiva Especialidad 2" && aprobadosEsp >= 2 ||
-    name === "Electiva Especialidad 3" && aprobadosEsp >= 3 ||
-    name === "Electiva Especialidad 4" && aprobadosEsp >= 4
-  ) {
-    div.classList.add("aprobado");
+  // Electivas de Especialidad 1 a 4
+  const mapaEspecialidad = {
+    "Electiva Especialidad I": 1,
+    "Electiva Especialidad II": 2,
+    "Electiva Especialidad III": 3,
+    "Electiva Especialidad IV": 4
+  };
+
+  if (mapaEspecialidad[name]) {
+    if (aprobadosEsp >= mapaEspecialidad[name]) {
+      data[name] = true;
+    } else {
+      delete data[name];
+    }
   }
 });
+
 
 
   // Re-render para actualizar colores
