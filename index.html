@@ -101,6 +101,7 @@
       justify-content: center;
       gap: 10px;
      }
+
     #contador-electivos-generales, #contador-electivos-especialidad {
       text-align: center;
       font-weight: bold;
@@ -344,29 +345,50 @@
         div.dataset.name = ramo.name;
         div.dataset.prerequisites = JSON.stringify(ramo.prerequisites);
 
-        div.addEventListener("click", () => {
-          const name = div.dataset.name;
-          if (data[name]) {
-            delete data[name];
-          } else {
-            data[name] = true;
-          }
-          localStorage.setItem("mallaAprobada", JSON.stringify(data));
-          actualizarEstadoRamos();
-        });
-        contenedorRamos.appendChild(div);
-    });
-
        fila.appendChild(contenedorRamos);
 
        document.getElementById("contenedor-electivos").appendChild(fila);
-      
       }
+        div.addEventListener("click", () => {
+    const name = div.dataset.name;
+    if (data[name]) {
+      delete data[name];
+    } else {
+      data[name] = true;
+    }
+    localStorage.setItem("mallaAprobada", JSON.stringify(data));
+    actualizarEstadoRamos();
+  });
+});
+
   
     electivos.sort((a, b) => a.name.localeCompare(b.name));
     especialidad.sort((a, b) => a.name.localeCompare(b.name));
 
+  
+    if (ramo.prerrequisitos && ramo.prerrequisitos.length > 0) {
+      div.title = "Prerrequisitos: " + ramo.prerrequisitos.join(", ");
+    }
 
+    const completado = JSON.parse(localStorage.getItem(id)) || false;
+
+    if (completado) {
+      div.classList.add("completado");
+    }
+
+    div.addEventListener("click", () => {
+      const estadoActual = div.classList.contains("completado");
+      if (estadoActual) {
+        div.classList.remove("completado");
+        localStorage.setItem(id, false);
+      } else {
+        div.classList.add("completado");
+        localStorage.setItem(id, true);
+      }
+    });
+
+    return div;
+  }
   
     // Lógica para actualizar estado visual
     function verificarDesbloqueo(prerequisitos) {
@@ -379,7 +401,7 @@
     const prereqs = JSON.parse(div.dataset.prerequisites || "[]");
     div.classList.remove("aprobado", "disponible");
 
-    if (data[name]) {
+      if (data[name] === true) {
       div.classList.add("aprobado");
     } else if (verificarDesbloqueo(prereqs)) {
       div.classList.add("disponible");
@@ -465,6 +487,7 @@ document.querySelectorAll(".ramo").forEach(div => {
   });
 }
     actualizarEstadoRamos();
+    let data = JSON.parse(localStorage.getItem("mallaAprobada")) || {};
   </script>
 </body>
 </html>
