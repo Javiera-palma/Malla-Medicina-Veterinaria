@@ -121,10 +121,7 @@
 </head>
 <body>
    <h1>Malla Medicina Veterinaria - UdeC</h1>
-
-  <div class="scroll-container">
-    <div id="contenedor-malla" class="malla"></div>
-  </div>   
+ 
   
   <div id="contador-electivos-generales" style="background-color: #d6f3ff; color: #004d66; padding: 10px; margin: 10px 0; border-radius: 8px; text-align: center; font-weight: bold;">
     Electivos Generales pendientes (0 de 2)
@@ -134,6 +131,9 @@
   </div> 
   <div id="contenedor-electivos"></div>
   
+  <div class="scroll-container">
+    <div id="contenedor-malla" class="malla"></div>
+  </div>  
   <script>
     const data = JSON.parse(localStorage.getItem("mallaAprobada") || "{}");
     
